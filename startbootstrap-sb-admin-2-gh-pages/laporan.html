@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Laporan Laba Rugi - Han Repair">
+
+    <title>Han Repair - Laporan Laba Rugi</title>
+
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/han-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/han.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"></ul>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" id="topbar"></nav>
+
+                <div class="container-fluid">
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Laporan Laba Rugi</h1>
+                        <button class="btn btn-sm btn-primary shadow-sm no-print" id="btnCetak">
+                            <i class="fas fa-print fa-sm mr-1"></i> Cetak
+                        </button>
+                    </div>
+
+                    <div class="card shadow mb-4 no-print">
+                        <div class="card-body">
+                            <div class="form-row align-items-end">
+                                <div class="form-group col-md-3 mb-md-0">
+                                    <label class="small font-weight-bold">Dari Tanggal</label>
+                                    <input type="date" class="form-control" id="from">
+                                </div>
+                                <div class="form-group col-md-3 mb-md-0">
+                                    <label class="small font-weight-bold">Sampai Tanggal</label>
+                                    <input type="date" class="form-control" id="to">
+                                </div>
+                                <div class="form-group col-md-6 mb-0">
+                                    <button class="btn btn-primary" id="btnTerapkan"><i class="fas fa-filter mr-1"></i>Terapkan</button>
+                                    <button class="btn btn-outline-secondary" id="btnBulanIni">Bulan Ini</button>
+                                    <button class="btn btn-outline-secondary" id="btnTahunIni">Tahun Ini</button>
+                                    <button class="btn btn-outline-secondary" id="btnSemua">Semua</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="text-center mb-4">
+                                <h4 class="font-weight-bold mb-0">HAN REPAIR</h4>
+                                <div class="text-muted small">Bengkel Motor - Sistem Informasi Akuntansi</div>
+                                <h5 class="mt-3 mb-0 laporan-title">LAPORAN LABA RUGI</h5>
+                                <div class="text-muted small" id="periodeText"></div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-han" width="100%" cellspacing="0">
+                                    <tbody>
+                                        <tr>
+                                            <td>Pendapatan Penjualan</td>
+                                            <td class="text-right rupiah" id="rowPendapatan">Rp 0</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pl-4 text-muted">Harga Pokok Penjualan (HPP)</td>
+                                            <td class="text-right text-danger rupiah" id="rowHpp">(Rp 0)</td>
+                                        </tr>
+                                        <tr class="bg-light font-weight-bold">
+                                            <td>LABA KOTOR</td>
+                                            <td class="text-right rupiah" id="rowLabaKotor">Rp 0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Beban Operasional</td>
+                                            <td class="text-right text-danger rupiah" id="rowBeban">(Rp 0)</td>
+                                        </tr>
+                                        <tr><td colspan="2" class="p-0"><div id="detailBeban" class="pl-4 py-0"></div></td></tr>
+                                        <tr class="font-weight-bold" style="border-top:2px solid #444;">
+                                            <td class="h5 mb-0">LABA BERSIH</td>
+                                            <td class="text-right h5 mb-0 rupiah" id="rowLabaBersih">Rp 0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="small text-muted mb-0">Jumlah transaksi penjualan pada periode ini: <span id="rowTransaksi">0</span></p>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4 no-print">
+                        <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Beban Operasional</h6>
+                            <button class="btn btn-primary btn-sm" id="btnTambahBeban">
+                                <i class="fas fa-plus mr-1"></i> Tambah
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-han table-bordered" width="100%" cellspacing="0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Keterangan</th>
+                                            <th class="text-right">Jumlah</th>
+                                            <th class="text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyBeban"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; <span id="footerYear"></span> Han Repair</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="bebanModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="formBeban">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tambah Beban Operasional</h5>
+                        <button class="close" type="button" data-dismiss="modal"><span>&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="small font-weight-bold">Tanggal</label>
+                            <input type="date" class="form-control" id="bebanTanggal" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="small font-weight-bold">Keterangan</label>
+                            <input type="text" class="form-control" id="bebanKet" placeholder="Contoh: Listrik bengkel" required>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label class="small font-weight-bold">Jumlah</label>
+                            <input type="number" min="0" class="form-control" id="bebanJumlah" value="0" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-save mr-1"></i> Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    <div id="logout-modal"></div>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/han-app.js"></script>
+    <script>
+        Han.layout("laporan.html");
+
+        function renderLaporan() {
+            var from = $("#from").val();
+            var to = $("#to").val();
+            var lr = Han.labaRugi(from, to);
+
+            $("#periodeText").text("Periode " + Han.fmtDate(from) + " s/d " + Han.fmtDate(to));
+            $("#rowPendapatan").text(Han.money(lr.pendapatan));
+            $("#rowHpp").text("(" + Han.money(lr.hpp) + ")");
+            $("#rowLabaKotor").text(Han.money(lr.labaKotor));
+            $("#rowBeban").text("(" + Han.money(lr.beban) + ")");
+            $("#rowLabaBersih").text(Han.money(lr.labaBersih))
+                .removeClass("text-success text-danger")
+                .addClass(lr.labaBersih >= 0 ? "text-success" : "text-danger");
+            $("#rowTransaksi").text(lr.transaksi);
+
+            var bebanList = Han.listBeban().filter(function (b) {
+                return b.tanggal >= from && b.tanggal <= to;
+            }).sort(function (a, b) { return a.tanggal < b.tanggal ? -1 : 1; });
+            var detail = "";
+            bebanList.forEach(function (b) {
+                detail += '<div class="small text-muted d-flex justify-content-between" style="max-width:420px;">' +
+                    '<span>- ' + Han.escapeHtml(b.keterangan) + '</span>' +
+                    '<span class="rupiah">' + Han.money(b.jumlah) + '</span></div>';
+            });
+            $("#detailBeban").html(detail);
+
+            renderBeban();
+        }
+
+        function renderBeban() {
+            var rows = "";
+            Han.listBeban().slice().sort(function (a, b) { return a.tanggal < b.tanggal ? 1 : -1; })
+                .forEach(function (b) {
+                    rows += '<tr><td>' + Han.fmtDate(b.tanggal) + '</td>' +
+                        '<td>' + Han.escapeHtml(b.keterangan) + '</td>' +
+                        '<td class="text-right rupiah">' + Han.money(b.jumlah) + '</td>' +
+                        '<td class="text-center"><button class="btn btn-sm btn-danger btn-hapus-beban" data-id="' + b.id + '">' +
+                        '<i class="fas fa-trash"></i></button></td></tr>';
+                });
+            if (!rows) rows = '<tr><td colspan="4" class="text-center text-muted">Belum ada beban operasional.</td></tr>';
+            $("#tbodyBeban").html(rows);
+        }
+
+        $("#btnTerapkan").on("click", renderLaporan);
+
+        $("#btnBulanIni").on("click", function () {
+            $("#from").val(Han.firstDayOfMonth());
+            $("#to").val(Han.todayISO());
+            renderLaporan();
+        });
+
+        $("#btnTahunIni").on("click", function () {
+            var y = new Date().getFullYear();
+            $("#from").val(y + "-01-01");
+            $("#to").val(y + "-12-31");
+            renderLaporan();
+        });
+
+        $("#btnSemua").on("click", function () {
+            $("#from").val("2000-01-01");
+            $("#to").val("2100-12-31");
+            renderLaporan();
+        });
+
+        $("#btnCetak").on("click", function () { window.print(); });
+
+        $("#btnTambahBeban").on("click", function () {
+            $("#formBeban")[0].reset();
+            $("#bebanTanggal").val(Han.todayISO());
+            $("#bebanJumlah").val(0);
+            $("#bebanModal").modal("show");
+        });
+
+        $("#formBeban").on("submit", function (e) {
+            e.preventDefault();
+            var list = Han.listBeban();
+            list.push({
+                id: Han.uid(),
+                tanggal: $("#bebanTanggal").val(),
+                keterangan: $("#bebanKet").val().trim(),
+                jumlah: Han.num($("#bebanJumlah").val())
+            });
+            Han.write(Han.KEYS.beban, list);
+            $("#bebanModal").modal("hide");
+            renderLaporan();
+        });
+
+        $(document).on("click", ".btn-hapus-beban", function () {
+            if (!confirm("Hapus beban ini?")) return;
+            var id = $(this).attr("data-id");
+            Han.write(Han.KEYS.beban, Han.listBeban().filter(function (b) { return String(b.id) !== String(id); }));
+            renderLaporan();
+        });
+
+        $("#from").val(Han.firstDayOfMonth());
+        $("#to").val(Han.todayISO());
+        $("#bebanTanggal").val(Han.todayISO());
+        renderLaporan();
+    </script>
+
+</body>
+
+</html>

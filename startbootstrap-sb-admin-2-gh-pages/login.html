@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Sistem Informasi Akuntansi Bengkel Motor Han Repair">
+
+    <title>Han Repair - Login</title>
+
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/han-icons.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/han.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-xl-5 col-lg-6 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <div class="brand-login">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        style="width:2.2rem;height:2.2rem;">
+                                        <circle cx="5.5" cy="17.5" r="3.5"></circle>
+                                        <circle cx="18.5" cy="17.5" r="3.5"></circle>
+                                        <path d="M5.5 17.5h4l3-6h4l2 3.5"></path>
+                                        <path d="M9 11.5 7.5 9h-2"></path>
+                                        <path d="M14.5 11.5 16 9h2.5"></path>
+                                    </svg>
+                                </div>
+                                <h1 class="h4 text-gray-900 mb-1 font-weight-bold">Han Repair</h1>
+                                <p class="text-muted mb-4">Sistem Informasi Akuntansi Bengkel Motor</p>
+                            </div>
+
+                            <div id="loginAlert" class="alert alert-danger py-2 d-none" role="alert"></div>
+
+                            <form id="formLogin" class="user">
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="username"
+                                        placeholder="Username" autocomplete="username" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-user" id="password"
+                                        placeholder="Password" autocomplete="current-password" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    <i class="fas fa-sign-in-alt mr-1"></i> Login
+                                </button>
+                            </form>
+
+                            <hr>
+                            <div class="text-center small text-muted">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/han-app.js"></script>
+    <script>
+        if (Han.currentUser()) {
+            window.location.replace("index.html");
+        }
+
+        $("#formLogin").on("submit", function (e) {
+            e.preventDefault();
+            var u = $("#username").val().trim();
+            var p = $("#password").val();
+            if (Han.login(u, p)) {
+                window.location.replace("index.html");
+            } else {
+                $("#loginAlert").removeClass("d-none").text("Username atau password salah.");
+            }
+        });
+    </script>
+
+</body>
+
+</html>

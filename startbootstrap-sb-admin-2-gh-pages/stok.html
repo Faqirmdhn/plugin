@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Stok Barang - Han Repair">
+
+    <title>Han Repair - Stok Barang</title>
+
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/han-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/han.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"></ul>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" id="topbar"></nav>
+
+                <div class="container-fluid">
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Stok Barang</h1>
+                        <a href="barang-masuk.html" class="btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-arrow-down fa-sm mr-1"></i> Barang Masuk
+                        </a>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Item</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalItem">0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Unit Stok</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalUnit">0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Stok Menipis</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalMenipis">0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-danger shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Stok Habis</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalHabis">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Kartu Stok</h6>
+                            <input type="text" class="form-control form-control-sm" style="width:220px;"
+                                id="cari" placeholder="Cari barang...">
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-han table-bordered" width="100%" cellspacing="0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Kode</th>
+                                            <th>Nama Barang</th>
+                                            <th class="text-right">Stok Awal</th>
+                                            <th class="text-right">Masuk</th>
+                                            <th class="text-right">Keluar</th>
+                                            <th class="text-right">Stok Akhir</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; <span id="footerYear"></span> Han Repair</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="opnameModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Stok Opname</h5>
+                    <button class="close" type="button" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-2">Barang: <strong id="opnameNama"></strong></p>
+                    <p class="small text-muted mb-3">Masukkan jumlah stok fisik hasil perhitungan. Stok awal akan disesuaikan otomatis.</p>
+                    <label class="small font-weight-bold">Stok Fisik</label>
+                    <input type="number" class="form-control" id="opnameQty">
+                    <input type="hidden" id="opnameKode">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                    <button class="btn btn-primary" type="button" id="btnSimpanOpname">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    <div id="logout-modal"></div>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/han-app.js"></script>
+    <script>
+        Han.layout("stok.html");
+
+        function render() {
+            var cari = $("#cari").val().toLowerCase();
+            var rows = "";
+            var totalUnit = 0, menipis = 0, habis = 0, item = 0;
+            Han.listBarang().forEach(function (b) {
+                if (cari && (b.kode + " " + b.nama).toLowerCase().indexOf(cari) === -1) return;
+                var st = Han.statusStok(b);
+                var jasa = Han.isJasa(b);
+                var stok = Han.stokOf(b.kode);
+                if (!jasa) {
+                    item++;
+                    if (stok > 0) totalUnit += stok;
+                    if (st.label === "Menipis") menipis++;
+                    if (st.label === "Habis") habis++;
+                }
+                rows += '<tr>' +
+                    '<td>' + Han.escapeHtml(b.kode) + '</td>' +
+                    '<td>' + Han.escapeHtml(b.nama) + '</td>' +
+                    '<td class="text-right">' + (jasa ? "-" : b.stokAwal) + '</td>' +
+                    '<td class="text-right text-success">' + (jasa ? "-" : "+" + Han.totalMasuk(b.kode)) + '</td>' +
+                    '<td class="text-right text-danger">' + (jasa ? "-" : "-" + Han.totalKeluar(b.kode)) + '</td>' +
+                    '<td class="text-right font-weight-bold">' + (jasa ? "-" : stok + " " + (b.satuan || "")) + '</td>' +
+                    '<td class="text-center"><span class="badge badge-' + st.cls + '">' + st.label + '</span></td>' +
+                    '<td class="text-center">' +
+                    (jasa ? '<span class="text-muted small">-</span>' :
+                        '<button class="btn btn-sm btn-outline-primary btn-opname" data-kode="' + Han.escapeHtml(b.kode) + '">' +
+                        '<i class="fas fa-clipboard-check mr-1"></i>Opname</button>') +
+                    '</td></tr>';
+            });
+            if (!rows) rows = '<tr><td colspan="8" class="text-center text-muted">Belum ada data barang.</td></tr>';
+            $("#tbody").html(rows);
+            $("#totalItem").text(item);
+            $("#totalUnit").text(totalUnit.toLocaleString("id-ID"));
+            $("#totalMenipis").text(menipis);
+            $("#totalHabis").text(habis);
+        }
+
+        $("#cari").on("input", render);
+
+        $(document).on("click", ".btn-opname", function () {
+            var kode = $(this).attr("data-kode");
+            var b = Han.getBarang(kode);
+            if (!b) { alert("Data barang tidak ditemukan."); return; }
+            $("#opnameKode").val(b.kode);
+            $("#opnameNama").text(b.kode + " - " + b.nama);
+            $("#opnameQty").val(Han.stokOf(kode));
+            $("#opnameModal").modal("show");
+        });
+
+        $("#btnSimpanOpname").on("click", function () {
+            var kode = $("#opnameKode").val();
+            var fisik = Han.num($("#opnameQty").val());
+            var b = Han.getBarang(kode);
+            if (!b) return;
+            b.stokAwal = fisik - Han.totalMasuk(kode) + Han.totalKeluar(kode);
+            var list = Han.listBarang().map(function (x) { return String(x.kode) === String(kode) ? b : x; });
+            Han.saveBarangList(list);
+            $("#opnameModal").modal("hide");
+            render();
+        });
+
+        render();
+    </script>
+
+</body>
+
+</html>

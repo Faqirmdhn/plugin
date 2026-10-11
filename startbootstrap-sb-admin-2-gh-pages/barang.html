@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Data Barang - Han Repair">
+
+    <title>Han Repair - Data Barang</title>
+
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/han-icons.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/han.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"></ul>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" id="topbar"></nav>
+
+                <div class="container-fluid">
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Data Barang</h1>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Daftar Barang</h6>
+                            <div class="d-flex align-items-center">
+                                <input type="text" class="form-control form-control-sm mr-2" style="width:200px;"
+                                    id="cari" placeholder="Cari barang...">
+                                <button class="btn btn-primary btn-sm text-nowrap" id="btnTambah">
+                                    <i class="fas fa-plus mr-1"></i> Tambah
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-han table-bordered" width="100%" cellspacing="0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Kode</th>
+                                            <th>Nama</th>
+                                            <th>Kategori</th>
+                                            <th class="text-right">H. Beli</th>
+                                            <th class="text-right">H. Jual</th>
+                                            <th class="text-right">Stok</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; <span id="footerYear"></span> Han Repair</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="formBarang">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="formTitle">Tambah Barang</h5>
+                        <button class="close" type="button" data-dismiss="modal"><span>&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="alert" class="alert alert-danger py-2 d-none"></div>
+                        <div class="form-group">
+                            <label class="small font-weight-bold">Kode Barang</label>
+                            <input type="text" class="form-control" id="kode" placeholder="SP-001" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="small font-weight-bold">Nama Barang</label>
+                            <input type="text" class="form-control" id="nama" placeholder="Nama barang" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-7">
+                                <label class="small font-weight-bold">Kategori</label>
+                                <input type="text" class="form-control" id="kategori" list="kategoriList"
+                                    placeholder="Oli">
+                                <datalist id="kategoriList">
+                                    <option value="Oli"></option>
+                                    <option value="Kelistrikan"></option>
+                                    <option value="Rem"></option>
+                                    <option value="Transmisi"></option>
+                                    <option value="Ban"></option>
+                                    <option value="Body"></option>
+                                    <option value="Jasa"></option>
+                                </datalist>
+                            </div>
+                            <div class="form-group col-5">
+                                <label class="small font-weight-bold">Satuan</label>
+                                <input type="text" class="form-control" id="satuan" placeholder="Pcs">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label class="small font-weight-bold">Harga Beli</label>
+                                <input type="number" min="0" class="form-control" id="hargaBeli" value="0">
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="small font-weight-bold">Harga Jual</label>
+                                <input type="number" min="0" class="form-control" id="hargaJual" value="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label class="small font-weight-bold">Stok Awal</label>
+                                <input type="number" class="form-control" id="stokAwal" value="0">
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="small font-weight-bold">Stok Minimum</label>
+                                <input type="number" min="0" class="form-control" id="stokMin" value="0">
+                            </div>
+                        </div>
+                        <small class="text-muted d-block">Untuk kategori "Jasa", stok tidak dihitung.</small>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-save mr-1"></i> Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    <div id="logout-modal"></div>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/han-app.js"></script>
+    <script>
+        Han.layout("barang.html");
+
+        var editKode = null;
+
+        function render() {
+            var cari = $("#cari").val().toLowerCase();
+            var rows = "";
+            Han.listBarang().forEach(function (b) {
+                if (cari && (b.kode + " " + b.nama + " " + (b.kategori || "")).toLowerCase().indexOf(cari) === -1) return;
+                var st = Han.statusStok(b);
+                var stokTampil = Han.isJasa(b) ? "-" : Han.stokOf(b.kode);
+                rows += '<tr>' +
+                    '<td>' + Han.escapeHtml(b.kode) + '</td>' +
+                    '<td>' + Han.escapeHtml(b.nama) + '</td>' +
+                    '<td>' + Han.escapeHtml(b.kategori || "-") + '</td>' +
+                    '<td class="text-right rupiah">' + Han.money(b.hargaBeli) + '</td>' +
+                    '<td class="text-right rupiah">' + Han.money(b.hargaJual) + '</td>' +
+                    '<td class="text-right">' + stokTampil + ' ' + Han.escapeHtml(b.satuan || "") + '</td>' +
+                    '<td class="text-center"><span class="badge badge-' + st.cls + '">' + st.label + '</span></td>' +
+                    '<td class="text-center text-nowrap">' +
+                    '<button class="btn btn-sm btn-info btn-edit" data-kode="' + Han.escapeHtml(b.kode) + '" title="Ubah"><i class="fas fa-edit"></i></button> ' +
+                    '<button class="btn btn-sm btn-danger btn-hapus" data-kode="' + Han.escapeHtml(b.kode) + '" title="Hapus"><i class="fas fa-trash"></i></button>' +
+                    '</td></tr>';
+            });
+            if (!rows) rows = '<tr><td colspan="8" class="text-center text-muted">Belum ada data. Klik tombol Tambah untuk mengisi.</td></tr>';
+            $("#tbody").html(rows);
+        }
+
+        function resetForm() {
+            editKode = null;
+            $("#formBarang")[0].reset();
+            $("#hargaBeli, #hargaJual, #stokAwal, #stokMin").val(0);
+            $("#kode").prop("disabled", false);
+            $("#formTitle").text("Tambah Barang");
+            $("#alert").addClass("d-none");
+        }
+
+        $("#btnTambah").on("click", function () {
+            resetForm();
+            $("#formModal").modal("show");
+        });
+
+        $("#formBarang").on("submit", function (e) {
+            e.preventDefault();
+            var kode = $("#kode").val().trim();
+            var list = Han.listBarang();
+            if (!editKode) {
+                var sudah = list.some(function (b) { return b.kode.toLowerCase() === kode.toLowerCase(); });
+                if (sudah) {
+                    $("#alert").removeClass("d-none").text("Kode barang sudah dipakai.");
+                    return;
+                }
+            }
+            var rec = {
+                kode: editKode || kode,
+                nama: $("#nama").val().trim(),
+                kategori: $("#kategori").val().trim(),
+                satuan: $("#satuan").val().trim(),
+                hargaBeli: Han.num($("#hargaBeli").val()),
+                hargaJual: Han.num($("#hargaJual").val()),
+                stokAwal: Han.num($("#stokAwal").val()),
+                stokMin: Han.num($("#stokMin").val())
+            };
+            if (editKode) {
+                list = list.map(function (b) { return String(b.kode) === String(editKode) ? rec : b; });
+            } else {
+                list.push(rec);
+            }
+            Han.saveBarangList(list);
+            $("#formModal").modal("hide");
+            render();
+        });
+
+        $("#cari").on("input", render);
+
+        $(document).on("click", ".btn-edit", function () {
+            var kode = $(this).attr("data-kode");
+            var b = Han.getBarang(kode);
+            if (!b) { alert("Data barang tidak ditemukan."); return; }
+            editKode = b.kode;
+            $("#kode").val(b.kode).prop("disabled", true);
+            $("#nama").val(b.nama);
+            $("#kategori").val(b.kategori || "");
+            $("#satuan").val(b.satuan || "");
+            $("#hargaBeli").val(b.hargaBeli);
+            $("#hargaJual").val(b.hargaJual);
+            $("#stokAwal").val(b.stokAwal);
+            $("#stokMin").val(b.stokMin);
+            $("#formTitle").text("Ubah Barang");
+            $("#alert").addClass("d-none");
+            $("#formModal").modal("show");
+        });
+
+        $(document).on("click", ".btn-hapus", function () {
+            var kode = $(this).attr("data-kode");
+            var dipakai = Han.listMasuk().some(function (m) { return String(m.kode) === String(kode); }) ||
+                Han.listKeluar().some(function (k) { return String(k.kode) === String(kode); });
+            if (dipakai) {
+                alert("Barang sudah dipakai pada transaksi dan tidak dapat dihapus.");
+                return;
+            }
+            if (!confirm("Hapus barang ini?")) return;
+            Han.saveBarangList(Han.listBarang().filter(function (b) { return String(b.kode) !== String(kode); }));
+            render();
+        });
+
+        render();
+    </script>
+
+</body>
+
+</html>
